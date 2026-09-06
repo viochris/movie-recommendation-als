@@ -7,45 +7,46 @@ scipy
 matplotlib
 seaborn
 
-# --- Machine learning core, preprocessing & resampling ---
+# --- Distributed recommender system (ALS via Spark MLlib) ---
+pyspark
+
+# --- Modeling, tuning, and resampling (imported in the setup cell) ---
 scikit-learn
 imbalanced-learn
-
-# --- Gradient boosting & ensemble models ---
+optuna
 xgboost
 lightgbm
 catboost
 
-# --- Hyperparameter optimization ---
-optuna
-
 # --- Model interpretability ---
 lime
 
-# --- Serialization ---
+# --- Present in the setup cell, unused by the ALS pipeline itself ---
 joblib
+
 # ------------------------------------------------------------------
-# NOTES (read before you `pip install`):
+# NOTES (read before you `pip install` or run the notebook):
 #
-# 1. This list covers every top-level import actually present in the
-#    notebook's first cell, including packages like `catboost` and
-#    `imbalanced-learn` whose classes are imported but not used in the
-#    final modeling pipeline. All of them are still required, or the
-#    very first cell will fail on import.
+# 1. `pyspark` is a Python wrapper around the Java-based Apache Spark
+#    engine. Installing the `pyspark` package with pip is NOT enough
+#    on its own: you also need a working Java Development Kit (JDK)
+#    installed on your system, with `JAVA_HOME` set and `java` on
+#    your PATH. Java 17 (LTS) is the version most commonly recommended
+#    for current Spark 3.x releases; Java 11 is also widely supported.
+#    Run `java -version` in the same terminal you'll launch the
+#    notebook from to confirm it resolves before running any Spark
+#    code, or you'll hit a "JAVA_HOME is not set" style error.
 #
-# 2. LightGBM's prebuilt pip wheels usually work out of the box, but on
-#    some macOS setups you may need the OpenMP runtime installed
-#    separately (`brew install libomp`) for it to run correctly.
+# 2. The final trained model in this notebook is saved with Spark's
+#    own model writer (`model.write().overwrite().save(path)`), which
+#    produces a directory of Parquet and metadata files, not a single
+#    `.joblib` or `.pkl` file. `joblib` is still listed here because
+#    it's imported in the setup cell, but the ALS pipeline itself
+#    does not use it for saving anything.
 #
-# 3. This notebook was originally developed and run on Kaggle, where
-#    Jupyter and `display()` are already available. `jupyter` itself
-#    is intentionally NOT listed above. Install it separately
-#    (`pip install jupyter`) if you want to open and run the .ipynb
-#    file on your own machine instead of on Kaggle.
-#
-# 4. Install everything in ONE `pip install -r requirements.txt` call
-#    inside a clean virtual environment, so pip's resolver can pick
-#    mutually compatible versions across scikit-learn, imbalanced-learn,
-#    xgboost, lightgbm, and catboost, instead of you pinning versions
-#    by hand and hitting conflicts later.
+# 3. Several packages here (xgboost, lightgbm, catboost,
+#    imbalanced-learn, lime, optuna) are imported in the notebook's
+#    setup cell but are not actually used by the ALS pipeline itself.
+#    They're included so the notebook runs top to bottom without an
+#    ImportError, not because the recommender depends on them.
 # ------------------------------------------------------------------
