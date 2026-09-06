@@ -1,0 +1,51 @@
+# --- Core data handling ---
+numpy
+pandas
+scipy
+
+# --- Visualization ---
+matplotlib
+seaborn
+
+# --- Machine learning core, preprocessing & resampling ---
+scikit-learn
+imbalanced-learn
+
+# --- Gradient boosting & ensemble models ---
+xgboost
+lightgbm
+catboost
+
+# --- Hyperparameter optimization ---
+optuna
+
+# --- Model interpretability ---
+lime
+
+# --- Serialization ---
+joblib
+# ------------------------------------------------------------------
+# NOTES (read before you `pip install`):
+#
+# 1. This list covers every top-level import actually present in the
+#    notebook's first cell, including packages like `catboost` and
+#    `imbalanced-learn` whose classes are imported but not used in the
+#    final modeling pipeline. All of them are still required, or the
+#    very first cell will fail on import.
+#
+# 2. LightGBM's prebuilt pip wheels usually work out of the box, but on
+#    some macOS setups you may need the OpenMP runtime installed
+#    separately (`brew install libomp`) for it to run correctly.
+#
+# 3. This notebook was originally developed and run on Kaggle, where
+#    Jupyter and `display()` are already available. `jupyter` itself
+#    is intentionally NOT listed above. Install it separately
+#    (`pip install jupyter`) if you want to open and run the .ipynb
+#    file on your own machine instead of on Kaggle.
+#
+# 4. Install everything in ONE `pip install -r requirements.txt` call
+#    inside a clean virtual environment, so pip's resolver can pick
+#    mutually compatible versions across scikit-learn, imbalanced-learn,
+#    xgboost, lightgbm, and catboost, instead of you pinning versions
+#    by hand and hitting conflicts later.
+# ------------------------------------------------------------------
